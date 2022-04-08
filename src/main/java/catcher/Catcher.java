@@ -21,11 +21,21 @@ public class Catcher {
 
     public Catcher CATCH(Consumer<Throwable> consumer){
         if(exception!=null)consumer.accept(exception);
+        exception=null;
+        return this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public <U extends Throwable> Catcher CATCH(Class<U> type, Consumer<U> consumer){
+        if(exception==null)return this;
+        if(type.isInstance(exception)){
+            consumer.accept((U) exception);
+            exception = null;
+        }
         return this;
     }
 
     public Catcher FINALLY(ThrowingRunnable runnable){
-        exception = null;
         try{
             runnable.run();
         } catch (Throwable e) {
