@@ -1,4 +1,4 @@
-package catcher;
+package me.pr3.catcher;
 
 import org.jetbrains.annotations.Nullable;
 

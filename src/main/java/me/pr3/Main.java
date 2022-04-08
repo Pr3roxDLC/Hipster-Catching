@@ -1,7 +1,8 @@
-import catcher.Catcher;
-import catcher.CatcherUtil;
+package me.pr3;
 
-import static catcher.Catcher.TRY;
+import me.pr3.catcher.CatcherUtil;
+
+import static me.pr3.catcher.Catcher.TRY;
 
 public class Main {
     public static void main(String[] args) {
