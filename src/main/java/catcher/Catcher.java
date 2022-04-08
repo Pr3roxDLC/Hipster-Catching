@@ -7,19 +7,19 @@ import java.util.function.Consumer;
 
 public class Catcher {
 
-    private Exception exception = null;
+    private Throwable exception = null;
 
     public static Catcher TRY(ThrowingRunnable runnable){
         Catcher catcher = new Catcher();
         try{
             runnable.run();
-        } catch (Exception e) {
+        } catch (Throwable e) {
             catcher.exception = e;
         }
         return catcher;
     }
 
-    public Catcher CATCH(Consumer<Exception> consumer){
+    public Catcher CATCH(Consumer<Throwable> consumer){
         if(exception!=null)consumer.accept(exception);
         return this;
     }
@@ -28,7 +28,7 @@ public class Catcher {
         exception = null;
         try{
             runnable.run();
-        } catch (Exception e) {
+        } catch (Throwable e) {
             exception = e;
         }
         return this;
