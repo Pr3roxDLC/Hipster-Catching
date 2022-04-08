@@ -24,7 +24,7 @@ public class Main {
         //Simple try/catch/finally clause replacement
         TRY(() -> Thread.sleep(1000)).CATCH(Throwable::printStackTrace).FINALLY(() -> System.out.println("Finished"));
 
-        //Chain chained finally/catch statements ??
+        //Chain finally/catch statements ??
         TRY(() -> Thread.sleep(1000))
                 .CATCH(Throwable::printStackTrace)
                 .FINALLY(() -> Thread.sleep(1000))
