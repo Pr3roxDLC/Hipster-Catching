@@ -12,35 +12,33 @@ public class CatcherUtil {
     public static void ignore(ThrowingRunnable runnable){
         try{
             runnable.run();
-        }catch (Exception ignored){
-            throw  new RuntimeException();
-        }
+        }catch (Throwable ignored){}
     }
 
     //Takes in a Runnable and prints the stackTrace if any Exceptions were thrown by it
     public static void stacktrace(ThrowingRunnable runnable){
         try{
             runnable.run();
-        }catch (Exception e){
+        }catch (Throwable e){
             e.printStackTrace();
         }
     }
 
     //Takes in a Runnable r and lets a Consumer c consume any Exceptions thrown by it
-    public static void catchIfThrown(ThrowingRunnable r, Consumer<Exception> c){
+    public static void catchIfThrown(ThrowingRunnable r, Consumer<Throwable> c){
         try{
             r.run();
-        }catch (Exception e){
+        }catch (Throwable e){
             c.accept(e);
         }
     }
 
     //Takes in a Runnable and returns an Optional<Exception> if one was thrown
-    public static Optional<Exception> asOptional(ThrowingRunnable runnable){
-        Optional<Exception> optionalException = Optional.empty();
+    public static Optional<Throwable> asOptional(ThrowingRunnable runnable){
+        Optional<Throwable> optionalException = Optional.empty();
         try{
             runnable.run();
-        }catch (Exception e){
+        }catch (Throwable e){
             optionalException = Optional.of(e);
         }
         return  optionalException;
@@ -50,17 +48,17 @@ public class CatcherUtil {
     public static boolean didThrow(ThrowingRunnable runnable){
         try{
             runnable.run();
-        }catch (Exception e){
+        }catch (Throwable e){
             return true;
         }
         return false;
     }
 
     //Returns a Nullable Exception if any Exception was thrown, returns null if none were thrown
-    public static @Nullable Exception getException(ThrowingRunnable runnable){
+    public static @Nullable Throwable getException(ThrowingRunnable runnable){
         try{
             runnable.run();
-        }catch (Exception e){
+        }catch (Throwable e){
             return e;
         }
         return null;
@@ -70,17 +68,17 @@ public class CatcherUtil {
     public static void ifNoneThrown(ThrowingRunnable first, Runnable then){
         try {
             first.run();
-        }catch (Exception e){
+        }catch (Throwable e){
             return;
         }
         then.run();
     }
 
 
-    public static void tryCatchRethrow(ThrowingRunnable runnable, Consumer<Exception> consumer) throws Exception {
+    public static void tryCatchRethrow(ThrowingRunnable runnable, Consumer<Throwable> consumer) throws Throwable {
         try{
             runnable.run();
-        }catch (Exception e){
+        }catch (Throwable e){
             consumer.accept(e);
             throw e;
         }
