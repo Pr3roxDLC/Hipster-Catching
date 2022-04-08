@@ -23,10 +23,10 @@ public class Catcher {
     }
 
     @SuppressWarnings("unchecked")
-    public <U extends Throwable> Catcher CATCH(Class<U> type, Consumer<U> consumer){
+    public <T extends Throwable> Catcher CATCH(Class<T> type, Consumer<T> consumer){
         if(exception==null)return this;
         if(type.isInstance(exception)){
-            consumer.accept((U) exception);
+            consumer.accept((T) exception);
             exception = null;
         }
         return this;
